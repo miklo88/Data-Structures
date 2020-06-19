@@ -64,7 +64,6 @@ class LinkedList:
 
       # otherwise, go to the next node
             current_node = current_node.next_node
-    
         return False
 
     # def get_max(self):
