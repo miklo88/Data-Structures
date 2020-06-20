@@ -8,7 +8,18 @@ class LinkedList:
     def __init__(self):
         self.head = None # Stores a node, that corresponds to our first node in the list 
         self.tail = None # stores a node that is the end of the list
-  
+    
+    # return all the values in the list
+    def __str__(self):
+        output = ''
+        current_node = self.head
+        #while current node HAS something
+        while current_node is not None: #loop until its none
+            output += f'{current_node.value} -> '
+        #set current node to the next value or you'll be printing 0 over and over.
+            current_node = current_node.next_node #update the tracker node to the next node.
+
+        return output
     def add_to_head(self, value):
     # create a node to add
         new_node = Node(value)
@@ -44,7 +55,7 @@ class LinkedList:
             head_value = self.head.value
             self.head = None
             self.tail = None
-        return head_value
+            return head_value
     # otherwise we have more elements in the list
         head_value = self.head.value
         self.head = self.head.next_node
@@ -76,7 +87,17 @@ class LinkedList:
         #looking for the highest value. 
         #compare values to one another. then return the highest value after total comparisons
 
-# example
+
+###playground example
+linked_list = LinkedList()
+
+linked_list.add_to_head(0)
+linked_list.add_to_tail(4)
+linked_list.add_to_tail(5)
+linked_list.add_to_tail(6)
+
+print(linked_list)
+# # example
 # linked_list = LinkedList()
 
 # linked_list.add_to_head(0)
@@ -86,8 +107,59 @@ class LinkedList:
 # print(f'does our LL contain 2? {linked_list.contains(2)}')
 
 # linked_list.add_to_head(2)
+# print(f'does our LL contain 2? {linked_list.contains(2)}')
 # print(f'the start of the list is {linked_list.head.value}')
 # linked_list.add_to_head(5)
 # print(f'the start of the list is {linked_list.head.value}')
 # linked_list.remove_head()
 # print(f'the start of the list is {linked_list.head.value}')
+########TESTTESTESTESTESTESTESTESTESTEST#################################
+import unittest
+from singly_linked_list import LinkedList
+
+class LinkedListTests(unittest.TestCase):
+    def setUp(self):
+        self.list = LinkedList()
+
+    def test_add_to_tail(self):
+        self.list.add_to_tail(1)
+        self.assertEqual(self.list.tail.value, 1)
+        self.assertEqual(self.list.head.value, 1)
+        self.list.add_to_tail(2)
+        self.assertEqual(self.list.tail.value, 2)
+        self.assertEqual(self.list.head.value, 1)
+
+    def test_contains(self):
+        self.list.add_to_tail(1)
+        self.list.add_to_tail(2)
+        self.list.add_to_tail(5)
+        self.list.add_to_tail(10)
+        self.assertTrue(self.list.contains(10))
+        self.assertTrue(self.list.contains(2))
+        self.assertFalse(self.list.contains(1000))
+
+    def test_remove_head(self):
+        self.list.add_to_tail(10)
+        self.list.add_to_tail(20)
+        self.assertEqual(self.list.remove_head(), 10)
+        self.assertFalse(self.list.contains(10))
+        self.assertEqual(self.list.remove_head(), 20)
+        self.assertFalse(self.list.contains(20))
+
+        self.list.add_to_tail(10)    
+        self.assertEqual(self.list.remove_head(), 10)    
+        self.assertIsNone(self.list.head)
+        self.assertIsNone(self.list.tail)
+        self.assertIsNone(self.list.remove_head())
+
+    def test_get_max(self):
+        self.assertIsNone(self.list.get_max())
+        self.list.add_to_tail(100)
+        self.assertEqual(self.list.get_max(), 100)
+        self.list.add_to_tail(55)
+        self.assertEqual(self.list.get_max(), 100)
+        self.list.add_to_tail(101)
+        self.assertEqual(self.list.get_max(), 101)
+
+if __name__ == '__main__':
+    unittest.main()
