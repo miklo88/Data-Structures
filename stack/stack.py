@@ -17,16 +17,31 @@ class Stack:
     def __init__(self):
         self.size = 0
         self.storage = []
-#length of the array? (dunder)
+#length of the array (dunder)
     def __len__(self):
         #loopin through the elements in the stack.
         return len(self.storage)
 
-#add to the end of the array
+#add to the front of the array
     def push(self, value):
-        self.storage.append(value)
+        self.size += 1
+        self.storage.insert(0, value)
         
 #pop the last item
     def pop(self):
-        if len(self.storage)>0:
-            return self.storage.pop()
+        #check if empty
+        if len(self.storage) == 0:
+            return None
+        #remove the first element in storage
+        self.size -= 1
+        node = self.storage.pop(0)
+        return node
+
+new_stack = Stack()
+print(len(new_stack))
+new_stack.push(2)
+new_stack.push(3)
+new_stack.push(5)
+print(len(new_stack))
+print(new_stack.storage)
+print(f'Removed value is: {new_stack.pop()}')
