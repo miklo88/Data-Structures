@@ -1,5 +1,7 @@
 """Each ListNode holds a reference to its previous node
 as well as its next node in the List."""
+#this is the node that will be part of our doubly linked list
+#
 class ListNode:
     def __init__(self, value, prev=None, next=None):
         self.value = value
@@ -48,7 +50,20 @@ class DoublyLinkedList:
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
     def add_to_head(self, value):
-        pass
+        #create new node that we will end up adding
+        new_node = ListNode(value, None, None)
+        #if list is currently empty add node  in that case
+        if self.head is None and self.tail is None:
+            #set the head and tail to equal the new node
+            self.head = new_node
+            self.tail = new_node
+        else:
+            #the list already has elements in it
+            #make new node point to current head
+            new_node.next = self.head
+            self.head.prev = new_node
+            #the last thing we need is the head value equal to the new node we created
+            self.head = new_node
 
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
@@ -60,8 +75,14 @@ class DoublyLinkedList:
     as the new tail of the list. Don't forget to handle 
     the old tail node's next pointer accordingly."""
     def add_to_tail(self, value):
-        pass
-
+        new_node = ListNode(value, None, None)
+        if self.tail is None and self.head is None:
+            self.tail = new_node
+            self.head = new_node
+        else:
+            new_node.next = self.head
+            self.tail.prev = new_node
+            self.tail = new_node
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node."""
@@ -80,9 +101,10 @@ class DoublyLinkedList:
 
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
+    #isn't deleting from end or start. its from whereever. START HERE MUCHACHO.
     def delete(self, node):
         pass
         
-    """Returns the highest value currently in the list"""
-    def get_max(self):
-        pass
+    # """Returns the highest value currently in the list"""
+    # def get_max(self):
+    #     pass
