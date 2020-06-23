@@ -29,11 +29,11 @@ class ListNode:
     """Rearranges this ListNode's previous and next pointers
     accordingly, effectively deleting this ListNode."""
     def delete(self):
+        #the node calls delete on itself
         if self.prev:
             self.prev.next = self.next
         if self.next:
             self.next.prev = self.prev
-
 
 """Our doubly-linked list class. It holds references to
 the list's head and tail nodes."""
@@ -68,8 +68,8 @@ class DoublyLinkedList:
     """Removes the List's current head node, making the
     current head's next node the new head of the List.
     Returns the value of the removed Node."""
-    def remove_from_head(self):
-        pass
+    # def remove_from_head(self):
+    #     pass
 
     """Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
@@ -83,6 +83,7 @@ class DoublyLinkedList:
             new_node.next = self.head
             self.tail.prev = new_node
             self.tail = new_node
+            #the same as add to head. just had to change the values to tail and swap them around.
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node."""
@@ -103,8 +104,29 @@ class DoublyLinkedList:
     the node was the head or the tail"""
     #isn't deleting from end or start. its from whereever. START HERE MUCHACHO.
     def delete(self, node):
-        pass
-        
+        #plan the most. we can pass in any node
+        #if list is empty, do nothing
+        if self.head is None and self.tail is None:
+            return 
+        #the list is only one node so checking if the head == the tail. ad double checking the head.
+        self.length -= 1
+        if self.head == self.tail and node == self.head:
+            self.head = None
+            self.tail = None
+        #the node is the HEAD node. make sure we handle the head pointer correctly.
+        if self.head == node:
+            #pointing our head to the next node in our list
+            self.head = node.next 
+            node.delete()
+        #the node is the TAIL node make sure tail is handled correctly
+        if self.tail == node:
+            self.tail = node.prev
+            node.delete()
+        #the node is just some node in the list
+        else:
+            #just deleting some random node in the list
+            node.delete()
+    #this gets back up to the delete function above.        
     # """Returns the highest value currently in the list"""
     # def get_max(self):
     #     pass
