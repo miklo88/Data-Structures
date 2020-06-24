@@ -33,9 +33,10 @@ class ListNode:
         if self.prev:
             self.prev.next = self.next
         if self.next:
-            # self.next.prev = self.prev
-            next_node = self.next
-            next_node.prev = self.prev
+            self.next.prev = self.prev
+#breaking it down even more
+            # next_node = self.next
+            # next_node.prev = self.prev
 
 """Our doubly-linked list class. It holds references to
 the list's head and tail nodes."""
@@ -83,13 +84,13 @@ class DoublyLinkedList:
     def add_to_tail(self, value):
         new_node = ListNode(value, None, None)
 
-        self.length -= 1
+        self.length += 1
         if self.tail is None and self.head is None:
             self.tail = new_node
             self.head = new_node
         else:
-            new_node.next = self.head
-            self.tail.prev = new_node
+            new_node.prev = self.tail
+            self.tail.next = new_node
             self.tail = new_node
             #the same as add to head. just had to change the values to tail and swap them around.
     """Removes the List's current tail node, making the 
@@ -153,7 +154,7 @@ class DoublyLinkedList:
         if not self.head:
             return None
         max_val = self.head.value
-        current = self.head
+        current = self.head.next
         while current:
             if current.value > max_val:
                 max_val = current.value
