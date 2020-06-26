@@ -49,6 +49,7 @@ class BSTNode:
                 self.right = new_node
             else:
                 self.right.insert(value)
+    
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
@@ -58,18 +59,17 @@ class BSTNode:
         #compar the target to the current value
         # if current value < target
         found = False
-        if self.value < target:
+        if self.value >= target:
             #check the left subtree self.left.contains(target)
             if self.left is None:
                 return False
             found = self.left.contains(target)
 #if current value >= target
-        if self.value > target:
+        if self.value < target:
         #check if right subtree contains target
         #if you cannot go right, return false
             if self.right is None:
                 return False
-
             found = self.right.contains(target)
         return found
     # Return the maximum value found in the tree
@@ -165,22 +165,22 @@ class BSTNode:
     # def post_order_dft(self, node):
     #     pass
 
-# const print_node = (x) => { console.log(x) }
-print_node = lambda x: print(f'current_node is : {x}')
+# # const print_node = (x) => { console.log(x) }
+# print_node = lambda x: print(f'current_node is : {x}')
 
-example_node = BSTNode(8)
-example_node.insert(3)
-example_node.insert(4)
-example_node.insert(2)
-example_node.insert(10)
-example_node.insert(9)
-example_node.insert(12)
-example_node.dft_print(example_node)
-example_node.bft_print(example_node)
+# example_node = BSTNode(8)
+# example_node.insert(3)
+# example_node.insert(4)
+# example_node.insert(2)
+# example_node.insert(10)
+# example_node.insert(9)
+# example_node.insert(12)
+# example_node.dft_print(example_node)
+# example_node.bft_print(example_node)
 
-example_node.for_each(print_node)
-example_node.in_order_print(example_node)
-example_node.dft_print(example_node)
+# example_node.for_each(print_node)
+# example_node.in_order_print(example_node)
+# example_node.dft_print(example_node)
 
 
 # # #you have to decide either or
