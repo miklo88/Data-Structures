@@ -49,6 +49,7 @@ class BSTNode:
                 self.right = new_node
             else:
                 self.right.insert(value)
+    
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
@@ -58,21 +59,19 @@ class BSTNode:
         #compar the target to the current value
         # if current value < target
         found = False
-        if self.value < target:
+        if self.value >= target:
             #check the left subtree self.left.contains(target)
             if self.left is None:
                 return False
             found = self.left.contains(target)
 #if current value >= target
-        if self.value > target:
+        if self.value < target:
         #check if right subtree contains target
         #if you cannot go right, return false
             if self.right is None:
                 return False
-
             found = self.right.contains(target)
         return found
-    
     # Return the maximum value found in the tree
     def get_max(self):
         if self.right is None:
@@ -84,10 +83,13 @@ class BSTNode:
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
+        #calling fn on current node
         fn(self.value)
-        if self.left:
+        #if a left node calling for each
+        if self.left is not None:
             self.left.for_each(fn)
-        if self.right:
+            #if a right node calling for each
+        if self.right is not None:
             self.right.for_each(fn)
 
     # Part 2 -----------------------
@@ -100,7 +102,7 @@ class BSTNode:
         print(self.value)
         if self.right:
             self.right.in_order_print(self.right)
-        print(self.value)
+        # print(self.value)
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     #bft uses a queue and queues up its children
@@ -144,12 +146,12 @@ class BSTNode:
         while len(stack) > 0:
             current_node = stack.pop()
             print(current_node.value)
-            # print(current_node.value)
-            if self.left is not None:
-                stack.push(current_node.left.value)
+            
+            if current_node.left is not None:
+                stack.push(current_node.left)
 
-            if self.right is not None:
-                stack.push(current_node.right.value)
+            if current_node.right is not None:
+                stack.push(current_node.right)
 
 
     # # Stretch Goals -------------------------
@@ -163,6 +165,8 @@ class BSTNode:
     # def post_order_dft(self, node):
     #     pass
 
+# # const print_node = (x) => { console.log(x) }
+# print_node = lambda x: print(f'current_node is : {x}')
 
 # example_node = BSTNode(8)
 # example_node.insert(3)
@@ -172,13 +176,15 @@ class BSTNode:
 # example_node.insert(9)
 # example_node.insert(12)
 # example_node.dft_print(example_node)
+# example_node.bft_print(example_node)
 
-# print_node = lambda x= print(f'current_node is: (x)')
+# example_node.for_each(print_node)
+# example_node.in_order_print(example_node)
+# example_node.dft_print(example_node)
 
-# root_node.for_each(print_node)
 
-# #you have to decide either or
-# root_node.bft_print(root_node)
+# # #you have to decide either or
+# # root_node.bft_print(root_node)
 
-# #if you print like this then bft is NOT apart of the class.
-# # bft_print(root_node)
+# # #if you print like this then bft is NOT apart of the class.
+# # # bft_print(root_node)
