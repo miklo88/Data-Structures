@@ -99,7 +99,7 @@ class BSTNode:
     def in_order_print(self, node):
         if self.left:
             self.left.in_order_print(self.left)
-        # print(self.value)
+        print(self.value)
         if self.right:
             self.right.in_order_print(self.right)
         # print(self.value)
