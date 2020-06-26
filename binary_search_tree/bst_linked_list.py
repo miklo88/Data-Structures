@@ -18,7 +18,7 @@ class LinkedList:
     #     #set current node to the next value or you'll be printing 0 over and over.
     #         current_node = current_node.next_node #update the tracker node to the next node.
 
-        return output
+    #     return output
     def add_to_head(self, value):
     # create a node to add
         new_node = Node(value)
